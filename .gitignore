@@ -60,7 +60,7 @@ checkpoints/*.pt
 !checkpoints/.gitkeep
 
 # Logs
-logs/*.log
+
 *.log
 tensorboard_logs/
 wandb/
