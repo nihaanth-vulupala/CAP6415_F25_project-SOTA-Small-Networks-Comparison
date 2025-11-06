@@ -134,6 +134,6 @@ See [results/README.md](results/README.md) for detailed experimental results and
 MIT License - See LICENSE file for details
 
 ## Author
-
+Nihaanth Reddy Vulupala.
 Computer Vision CAP6415 - Fall 2025
 Florida Atlantic University
