@@ -18,3 +18,96 @@ ACTIVITIES COMPLETED:
    - Created README.md with project abstract and methodology
    - Created requirements.txt with all necessary dependencies
    - Set up virtual environment for development
+
+ACTIVITIES COMPLETED:
+
+1. PROJECT SETUP (November 3-4)
+   - Created GitHub repository with proper naming convention
+   - Initialized project structure with folders: models/, utils/, configs/, results/, logs/
+   - Created README.md with project abstract and methodology
+   - Created requirements.txt with all necessary dependencies
+   - Set up virtual environment for development
+
+2. LITERATURE REVIEW (November 4-6)
+   - Reviewed MobileNetV3 paper (Howard et al., ICCV 2019)
+     * Key findings: Uses neural architecture search, h-swish activation, squeeze-excite modules
+     * Parameters: ~2.5M (Small version)
+     * Original benchmark: ImageNet
+
+   - Reviewed EfficientNet paper (Tan & Le, ICML 2019)
+     * Key findings: Compound scaling method, balances depth/width/resolution
+     * Parameters: ~5.3M (B0 version)
+     * Original benchmark: ImageNet
+
+   - Reviewed ShuffleNetV2 paper (Ma et al., ECCV 2018)
+     * Key findings: Channel shuffle operation, efficient design guidelines
+     * Parameters: ~1.4M (0.5x version)
+     * Original benchmark: ImageNet
+
+   - Reviewed SqueezeNet paper (Iandola et al., arXiv 2016)
+     * Key findings: Fire modules with squeeze and expand layers
+     * Parameters: ~1.2M (version 1.1)
+     * Original benchmark: ImageNet
+
+3. MODEL SELECTION (November 6)
+   - Selected 4 models based on criteria:
+     * All have <50 layers (considering depth-wise separable convolutions as single layers)
+     * All are designed for efficiency
+     * Good diversity in architectural approaches
+     * Pre-trained weights available in PyTorch/timm
+
+   Final selection:
+   - MobileNetV3-Small
+   - EfficientNet-B0
+   - ShuffleNetV2 0.5x
+   - SqueezeNet 1.1
+
+4. DATASET SELECTION (November 7)
+   - Criteria: Must be different from ImageNet (original benchmark)
+   - Selected datasets:
+     * CIFAR-100: 60,000 32x32 images, 100 classes
+     * Stanford Dogs: 20,580 images, 120 dog breeds
+     * Flowers-102: 8,189 images, 102 flower categories
+
+   - Rationale:
+     * Different image resolutions (32x32 vs high-res)
+     * Different domain complexity
+     * Varying dataset sizes to test generalization
+
+5. ENVIRONMENT SETUP (November 8)
+   - Installed Python 3.10
+   - Created virtual environment
+   - Verified GPU availability (if applicable)
+   - Tested basic PyTorch installation
+   - Verified dataset download capabilities
+
+6. PRELIMINARY CODE STRUCTURE (November 9)
+   - Designed modular code architecture
+   - Planned training pipeline
+   - Designed evaluation metrics collection
+   - Sketched visualization requirements
+
+RESOURCES GATHERED:
+- Research papers (4 papers for models)
+- Dataset documentation
+- PyTorch and timm documentation
+- Example comparison studies from other repositories
+
+CHALLENGES ENCOUNTERED:
+- Deciding on EfficientNet-B0: technically has 237 layers but uses depth-wise separable convolutions
+  which are computationally equivalent to much smaller networks
+- Finding datasets that are sufficiently different from ImageNet but still challenging
+
+DECISIONS MADE:
+- Use PyTorch as primary framework (better model availability)
+- Use timm library for consistent model loading
+- Focus on transfer learning approach (fine-tune from ImageNet weights)
+- Standard training: 100 epochs with early stopping
+
+
+
+REFERENCES:
+[1] Howard, A., et al. "Searching for MobileNetV3." ICCV 2019.
+[2] Tan, M., & Le, Q. "EfficientNet: Rethinking Model Scaling for CNNs." ICML 2019.
+[3] Ma, N., et al. "ShuffleNet V2: Practical Guidelines for Efficient CNN Architecture Design." ECCV 2018.
+[4] Iandola, F., et al. "SqueezeNet: AlexNet-level accuracy with 50x fewer parameters." arXiv 2016.
