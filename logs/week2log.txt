@@ -2,4 +2,16 @@ WEEK 2 DEVELOPMENT LOG
 Date Range: November 10–16, 2025
 Project: SOTA Small Networks Comparison (CAP6415)
 
+- Setted up the virtual environment and added it to gitignore file
+- Downloading the datasets for the models to work in it for comparison
 
+Completed setup for all project data sources:
+
+CIFAR-100: Downloaded and extracted into datasets/cifar100/cifar-100-python/ with splits and metadata files.
+
+Oxford Flowers-102: Downloaded images (jpg), labels (imagelabels.mat), and splits (setid.mat). Confirmed extraction and structure in datasets/flowers102/flowers-102/.
+
+Stanford Dogs: Downloaded and organized the Stanford Dogs dataset in datasets/stanford_dogs/Images/, structured by breed folders (e.g., n02085620-Chihuahua).
+
+
+Confirmed .gitignore is properly set to exclude large data and the virtual environment folders.
