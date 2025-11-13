@@ -109,6 +109,12 @@ python visualize_results.py
 └── notebooks/               # Jupyter notebooks for analysis
     └── exploratory_analysis.ipynb
 ```
+## Data Setup
+- Placed CIFAR-100 files under `datasets/cifar100/cifar-100-python/`
+- Placed Flowers-102 images and label files under `datasets/flowers102/flowers-102/`
+- Placed Stanford Dogs images in `datasets/stanford_dogs/Images/{breed_folder}/`
+- Do not commit actual data or .venv to GitHub (ensure .gitignore is set)
+
 
 ## Attribution
 
