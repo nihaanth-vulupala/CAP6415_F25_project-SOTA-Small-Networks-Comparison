@@ -2,6 +2,7 @@ WEEK 2 DEVELOPMENT LOG
 Date Range: November 10–16, 2025
 Project: SOTA Small Networks Comparison (CAP6415)
 
+
 - Setted up the virtual environment and added it to gitignore file
 - Downloading the datasets for the models to work in it for comparison
 
