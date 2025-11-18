@@ -1,0 +1,93 @@
+WEEK 3 DEVELOPMENT LOG
+Date Range: November 17-23, 2025
+Project: SOTA Small Networks Comparison (CAP6415)
+
+
+
+
+
+
+===========================================
+November 17, 2025 - Data Loader Implementation
+===========================================
+
+Implemented data loading pipeline for all three datasets:
+
+1. CIFAR-100 Loader (get_cifar100_loaders):
+   - Using torchvision.datasets.CIFAR100 for easy loading
+   - Auto-download feature included
+   - Split: 45000 train / 5000 val / 10000 test
+   - Batch size: 128 (from config)
+   - Works perfectly out of the box
+
+2. Stanford Dogs Loader (get_stanford_dogs_loaders):
+   - Had to figure out the nested folder structure
+   - Images located at: datasets/stanford_dogs/Images/breed_folder/Images/
+   - Using ImageFolder since breeds are in separate folders
+   - Found 20,580 images across 120 dog breeds
+   - Split: 70% train / 15% val / 15% test (14405/3087/3088)
+   - Batch size: 32 (from config)
+
+3. Flowers-102 Loader (get_flowers102_loaders):
+   - Custom Dataset class needed to parse .mat files
+   - imagelabels.mat contains labels (converted from 1-indexed to 0-indexed)
+   - setid.mat contains train/val/test split indices
+   - Images named as image_00001.jpg, image_00002.jpg, etc.
+   - Split: 1020 train / 1020 val / 6149 test (official splits)
+   - Batch size: 32 (from config)
+
+Key Implementation Details:
+- Created utils/ directory and utils/__init__.py
+- get_transforms() handles train vs test augmentation
+- Training augmentation: RandomResizedCrop, RandomHorizontalFlip, ColorJitter, RandomRotation
+- Test augmentation: Resize, CenterCrop (no random stuff)
+- All images normalized with ImageNet statistics (for transfer learning)
+- get_dataloaders() is the main function - just pass dataset name
+- Added load_config() to read from configs/config.yaml
+
+Testing:
+- All three data loaders tested successfully
+- Created test_dataloaders.py for quick verification
+- Verified batch shapes: torch.Size([batch_size, 3, 224, 224])
+- All images properly resized to 224x224 as expected
+
+Notes/Issues:
+- Got some warnings about pynvml being deprecated (not critical)
+- MPS (Apple Silicon) doesn't support pin_memory yet (minor warning)
+- Stanford Dogs folder structure was confusing at first but figured it out
+- Flowers-102 .mat files use 1-based indexing (had to subtract 1)
+
+Files Created:
+- utils/__init__.py
+- utils/data_loader.py
+- test_dataloaders.py
+
+Next Steps (for rest of week):
+- Implement model loading (mobilenetv3, efficientnet, shufflenet, squeezenet)
+- Create training loop with basic functionality
+- Test 2-3 epoch run on CIFAR-100
+
+===========================================
+Manual Verification Test - November 17, 2025
+===========================================
+
+Ran: python utils/data_loader.py
+
+Test Results:
+CIFAR-100 works!
+  - Batch shape: torch.Size([128, 3, 224, 224])
+  - Labels shape: torch.Size([128])
+  - Train/Val/Test: 45000/5000/10000 samples
+
+Stanford Dogs works!
+  - Batch shape: torch.Size([32, 3, 224, 224])
+  - Labels shape: torch.Size([32])
+  - Train/Val/Test: 14405/3087/3088 samples
+
+Flowers-102 works!
+  - Batch shape: torch.Size([32, 3, 224, 224])
+  - Labels shape: torch.Size([32])
+  - Train/Val/Test: 1020/1020/6149 samples
+
+All data loaders verified working correctly.
+Minor warnings about pynvml deprecation and MPS pin_memory - not affecting functionality.
