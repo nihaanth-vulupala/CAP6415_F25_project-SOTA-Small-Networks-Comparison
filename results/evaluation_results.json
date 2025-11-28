@@ -1,0 +1,122 @@
+[
+  {
+    "model": "mobilenetv3",
+    "dataset": "cifar100",
+    "test_accuracy": 79.26,
+    "val_accuracy": 0.0,
+    "total_params": 1620356,
+    "model_size_mb": 6.18,
+    "avg_inference_time_ms": 44.91,
+    "checkpoint_epoch": 15
+  },
+  {
+    "model": "mobilenetv3",
+    "dataset": "stanford_dogs",
+    "test_accuracy": 63.7,
+    "val_accuracy": 0.0,
+    "total_params": 1640856,
+    "model_size_mb": 6.26,
+    "avg_inference_time_ms": 16.33,
+    "checkpoint_epoch": 15
+  },
+  {
+    "model": "mobilenetv3",
+    "dataset": "flowers102",
+    "test_accuracy": 86.16,
+    "val_accuracy": 0.0,
+    "total_params": 1622406,
+    "model_size_mb": 6.19,
+    "avg_inference_time_ms": 14.99,
+    "checkpoint_epoch": 14
+  },
+  {
+    "model": "efficientnet",
+    "dataset": "cifar100",
+    "test_accuracy": 63.45,
+    "val_accuracy": 0.0,
+    "total_params": 4135648,
+    "model_size_mb": 15.78,
+    "avg_inference_time_ms": 242.43,
+    "checkpoint_epoch": 1
+  },
+  {
+    "model": "efficientnet",
+    "dataset": "stanford_dogs",
+    "test_accuracy": 72.12,
+    "val_accuracy": 0.0,
+    "total_params": 4161268,
+    "model_size_mb": 15.87,
+    "avg_inference_time_ms": 57.53,
+    "checkpoint_epoch": 15
+  },
+  {
+    "model": "efficientnet",
+    "dataset": "flowers102",
+    "test_accuracy": 89.4,
+    "val_accuracy": 0.0,
+    "total_params": 4138210,
+    "model_size_mb": 15.79,
+    "avg_inference_time_ms": 60.34,
+    "checkpoint_epoch": 11
+  },
+  {
+    "model": "shufflenet",
+    "dataset": "cifar100",
+    "test_accuracy": 39.23,
+    "val_accuracy": 0.0,
+    "total_params": 444292,
+    "model_size_mb": 1.69,
+    "avg_inference_time_ms": 40.0,
+    "checkpoint_epoch": 15
+  },
+  {
+    "model": "shufflenet",
+    "dataset": "stanford_dogs",
+    "test_accuracy": 34.03,
+    "val_accuracy": 0.0,
+    "total_params": 464792,
+    "model_size_mb": 1.77,
+    "avg_inference_time_ms": 17.04,
+    "checkpoint_epoch": 14
+  },
+  {
+    "model": "shufflenet",
+    "dataset": "flowers102",
+    "test_accuracy": 10.29,
+    "val_accuracy": 0.0,
+    "total_params": 446342,
+    "model_size_mb": 1.7,
+    "avg_inference_time_ms": 14.0,
+    "checkpoint_epoch": 15
+  },
+  {
+    "model": "squeezenet",
+    "dataset": "cifar100",
+    "test_accuracy": 67.03,
+    "val_accuracy": 0.0,
+    "total_params": 773796,
+    "model_size_mb": 2.95,
+    "avg_inference_time_ms": 80.52,
+    "checkpoint_epoch": 15
+  },
+  {
+    "model": "squeezenet",
+    "dataset": "stanford_dogs",
+    "test_accuracy": 45.27,
+    "val_accuracy": 0.0,
+    "total_params": 784056,
+    "model_size_mb": 2.99,
+    "avg_inference_time_ms": 19.93,
+    "checkpoint_epoch": 15
+  },
+  {
+    "model": "squeezenet",
+    "dataset": "flowers102",
+    "test_accuracy": 2.37,
+    "val_accuracy": 0.0,
+    "total_params": 774822,
+    "model_size_mb": 2.96,
+    "avg_inference_time_ms": 27.19,
+    "checkpoint_epoch": 15
+  }
+]

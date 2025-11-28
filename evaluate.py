@@ -85,7 +85,9 @@ def evaluate_checkpoint(model_name, dataset_name, config, device):
     _, _, test_loader = get_dataloaders(dataset_name, config)
 
     # Get model info
-    total_params, trainable_params, model_size = count_parameters(model)
+    param_info = count_parameters(model)
+    total_params = param_info['total']
+    model_size_mb = param_info['total_mb']
 
     # Evaluate accuracy
     print("Measuring test accuracy...")
@@ -103,7 +105,7 @@ def evaluate_checkpoint(model_name, dataset_name, config, device):
         'test_accuracy': round(test_accuracy, 2),
         'val_accuracy': round(val_accuracy, 2),
         'total_params': total_params,
-        'model_size_mb': round(model_size, 2),
+        'model_size_mb': round(model_size_mb, 2),
         'avg_inference_time_ms': round(avg_inference_time, 2),
         'checkpoint_epoch': checkpoint.get('epoch', 0)
     }
@@ -111,7 +113,7 @@ def evaluate_checkpoint(model_name, dataset_name, config, device):
     print(f"Test Accuracy: {test_accuracy:.2f}%")
     print(f"Val Accuracy: {val_accuracy:.2f}%")
     print(f"Parameters: {total_params:,}")
-    print(f"Model Size: {model_size:.2f} MB")
+    print(f"Model Size: {model_size_mb:.2f} MB")
     print(f"Inference Time: {avg_inference_time:.2f} ms/batch")
 
     return results

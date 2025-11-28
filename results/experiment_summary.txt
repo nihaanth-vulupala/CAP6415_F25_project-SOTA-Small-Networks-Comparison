@@ -1,0 +1,7 @@
+WEEK 4 EXPERIMENT SUMMARY
+Started: 2025-11-27 20:17:20
+Total experiments: 12
+
+1. mobilenetv3 on cifar100: SUCCESS
+2. mobilenetv3 on stanford_dogs: SUCCESS
+3. mobilenetv3 on flowers102: SUCCESS
