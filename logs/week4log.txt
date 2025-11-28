@@ -128,3 +128,91 @@ Next Steps for Week 4:
 
 Training Pipeline Status: COMPLETE AND TESTED
 Ready for full-scale experiments.
+
+===========================================
+November 27, 2025 - Experiment Automation and Evaluation Tools
+===========================================
+
+Implemented experiment automation infrastructure for running all 12 model-dataset combinations:
+
+1. Experiment Runner (run_experiments.py):
+   - Automated script to run all 12 experiments sequentially
+   - Streams output to both console and individual log files
+   - Saves training logs to results/{model}_{dataset}_training.log
+   - Generates experiment summary at results/experiment_summary.txt
+   - Tracks success/failure of each experiment
+   - Displays time taken for each experiment
+
+2. Shell Script (run_all_experiments.sh):
+   - Alternative batch script for running all experiments
+   - Uses .venv/bin/python to ensure correct environment
+   - Outputs all logs with tee for real-time monitoring
+
+3. Experiment Documentation (EXPERIMENTS.md):
+   - Complete guide for running all experiments
+   - Lists all models, datasets, and configurations
+   - Provides commands for individual and batch execution
+   - Estimated training times and resource requirements
+
+Training Configuration (Updated):
+- Epochs: 15 (with early stopping, patience=5)
+- Batch size: 128
+- Initial learning rate: 0.01
+- Optimizer: SGD (momentum 0.9, weight decay 5e-4)
+- LR Scheduler: CosineAnnealingLR
+- Pretrained: ImageNet weights
+- Device: MPS (Apple Silicon GPU)
+- Estimated time per experiment: 30-40 minutes
+- Total time for all 12: 6-8 hours
+
+Evaluation Infrastructure:
+
+1. Evaluation Script (evaluate.py):
+   - Tests all trained model checkpoints on test sets
+   - Measures test accuracy for each model-dataset combination
+   - Calculates inference time (ms/batch)
+   - Reports model parameters and size
+   - Saves results to JSON format
+   - Command: python evaluate.py [--model MODEL] [--dataset DATASET]
+
+2. Visualization Script (visualize_results.py):
+   - Generates comparison charts from evaluation results
+   - Creates 4 types of visualizations:
+     a. Accuracy comparison across datasets
+     b. Model efficiency (size vs accuracy scatter plot)
+     c. Inference time comparison
+     d. Summary comparison table
+   - Saves all figures to results/figures/ directory
+   - Uses matplotlib for high-quality publication-ready charts
+
+3. Training Monitor (monitor_training.py):
+   - Real-time progress tracking for all 12 experiments
+   - Shows completion status (DONE/PENDING)
+   - Displays validation accuracy and epoch number for completed experiments
+   - Lists recent log files with timestamps
+   - Useful for checking progress without reading full logs
+
+===========================================
+Experiment Execution Status (as of 21:08)
+===========================================
+
+Started: November 27, 2025 at 20:17
+
+Completed Experiments (2/12):
+1. MobileNetV3 on CIFAR-100: 15 epochs completed
+2. MobileNetV3 on Stanford Dogs: 10 epochs completed (early stopping triggered)
+
+In Progress:
+- Experiment 3/12: MobileNetV3 on Flowers-102
+
+Pending (9/12):
+- All EfficientNet-B0 experiments (3)
+- All ShuffleNetV2 experiments (3)
+- All SqueezeNet experiments (3)
+
+
+
+All experiments running automatically in background.
+Checkpoints saved to: checkpoints/{dataset}/{model}/best_model.pth
+Training logs saved to: results/{model}_{dataset}_training.log
+
