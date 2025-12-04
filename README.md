@@ -2,9 +2,9 @@
 
 ## Abstract
 
-**Problem:** Selecting the optimal neural network architecture for resource-constrained edge devices requires understanding the trade-offs between accuracy, model size, and inference speed. While state-of-the-art small networks are designed for efficiency, their relative performance across diverse datasets and deployment scenarios remains unclear.
+**Problem:** There is a need to understand the trade-offs among accuracy, model size, and inference speed when determining which neural network architecture to use in order to optimize the performance of resource-constrained edge devices. Although small networks that are currently considered to be state-of-the-art in terms of efficiency were developed primarily with this objective in mind, it has been unclear how well they perform in relation to one another on a variety of different datasets as well as in various deployment settings.
 
-**Solution:** This project provides a comprehensive empirical comparison of four efficient CNN architectures (MobileNetV3, EfficientNet-B0, ShuffleNetV2, and SqueezeNet) across three challenging image classification datasets (CIFAR-100, Stanford Dogs, Flowers-102). Using transfer learning with ImageNet-pretrained weights, we evaluate each model on test accuracy, inference time, model size, and parameter count. Our analysis reveals that MobileNetV3 offers the best accuracy-efficiency balance for most scenarios (79.26% on CIFAR-100, 6.18 MB), while EfficientNet achieves the highest accuracy on fine-grained tasks (89.40% on Flowers-102) at the cost of increased size (15.78 MB). The results provide actionable insights for practitioners selecting models for mobile, edge, and cloud deployment contexts.
+**Solution:** The goal of this research project was to conduct a broad comparative study of the performance characteristics of four commonly used CNN architectures (SqueezeNet, ShuffleNet V2, MobileNet v3 and EfficientNet B0) on three challenging image classification datasets (CIFAR-100, Stanford Dogs, Flowers-102). We conducted our evaluation using the same transfer learning approach that utilized pre-trained ImageNet weights, comparing each of the models on the basis of their test accuracy, inference times, model sizes and number of parameters. The overall findings of this study demonstrate that for the majority of deployment scenarios, MobileNet V3 represents the best balance between accuracy and efficiency (79.26% test accuracy on CIFAR-100, 6.18 MB model size); however, the results also show that while Fine-Grained tasks can achieve higher levels of accuracy with larger models (e.g., 89.40% on Flowers-102 with an average model size of 15.78 MB), the larger models require additional resources that may not be available in all types of deployments. Overall, these results provide researchers and practitioners with relevant information about the relative strengths and weaknesses of these models for mobile, edge, and cloud-based deployment applications.
 
 ## Problem Statement
 
@@ -106,6 +106,118 @@ python evaluate.py --dataset cifar100 --checkpoint checkpoints/
 python visualize_results.py
 ```
 
+## For TA: Reproducibility Instructions
+
+### Quick Setup (5 minutes)
+
+```bash
+# 1. Clone the repository
+git clone https://github.com/nihaanth-vulupala/CAP6415_F25_project-SOTA-Small-Networks-Comparison.git
+cd CAP6415_F25_project-SOTA-Small-Networks-Comparison
+
+# 2. Create and activate virtual environment
+python3 -m venv venv
+source venv/bin/activate  # On Windows: venv\Scripts\activate
+
+# 3. Install dependencies
+pip install -r requirements.txt
+```
+
+### Run Evaluation (Recommended - 5-10 minutes)
+
+Evaluate all 12 trained models using existing checkpoints:
+
+```bash
+# Evaluate all models (datasets auto-download on first run)
+python evaluate.py
+
+# This will:
+# - Load all 12 trained model checkpoints
+# - Download datasets automatically (CIFAR-100, Stanford Dogs, Flowers-102) - ~1.2 GB
+# - Evaluate test accuracy and inference time
+# - Generate results/evaluation_results.json
+```
+
+**Expected Output:**
+- `results/evaluation_results.json` - Contains all 12 model results
+- Console output showing accuracy for each model-dataset combination
+
+**Expected Results:**
+- MobileNetV3 + CIFAR-100: **79.26%** accuracy
+- EfficientNet + Flowers-102: **89.40%** accuracy
+- EfficientNet + Stanford Dogs: **72.12%** accuracy
+
+**Runtime:** ~5-10 minutes (first run includes dataset download)
+
+### Generate Visualizations
+
+Create all comparison charts and analysis plots:
+
+```bash
+python create_demo_visualizations.py
+
+# Generates ten visualization in the folder results/figures/:
+# - accuracy_comparison.png
+# - architecture_comparison.png
+# - efficiency_comparison.png
+# - inference_time_comparison.png
+# - performance_heatmap.png
+# - efficiency_frontier.png
+# - deployment_recommendations.png
+# - dataset_analysis.png
+# - comparison_table.png
+# - summary_dashboard.png
+```
+
+**Runtime:** ~30 seconds
+
+### Test Single Model (Optional - 30-60 minutes)
+
+To verify the training pipeline works, train one model:
+
+```bash
+# Train MobileNetV3 on CIFAR-100 (fastest experiment)
+python train.py --model mobilenetv3 --dataset cifar100 --epochs 15 --pretrained
+
+# Expected runtime:
+# - GPU (CUDA/MPS): ~30 minutes
+# - CPU: ~2 hours
+# Expected accuracy: ~79% (may vary ±2% due to randomness)
+```
+
+**Other model options:**
+```bash
+# Train EfficientNet on Flowers-102
+python train.py --model efficientnet --dataset flowers102 --epochs 15 --pretrained
+
+# Train ShuffleNet on Stanford Dogs
+python train.py --model shufflenet --dataset stanford_dogs --epochs 15 --pretrained
+
+# Train SqueezeNet on CIFAR-100
+python train.py --model squeezenet --dataset cifar100 --epochs 15 --pretrained
+```
+
+### Verification Checklist
+
+After running the evaluation, verify:
+- [ ] `results/evaluation_results.json` exists with 12 entries
+- [ ] MobileNetV3 achieves ~79% on CIFAR-100
+- [ ] EfficientNet achieves ~89% on Flowers-102
+- [ ] All 10 PNG visualizations are generated in `results/figures/`
+
+### Trouble shooting
+**"ModuleNotFoundError: No module named 'torch'".**
+
+Solution: Make sure to activate the virtual environment with `source venv/bin/activate`.
+
+**"FileNotFoundError: checkpoint not found".**
+
+Solution: Make sure you are in the project directory.
+
+**"CUDA out of memory".** (During Training)
+
+Solution: Add `--device cpu` flag or decrease batch size in `configs/config.yaml`.
+
 ## Project Structure
 
 ```
@@ -173,5 +285,6 @@ MIT License - See LICENSE file for details
 
 ## Author
 Nihaanth Reddy Vulupala.
+Z32815779
 Computer Vision CAP6415 - Fall 2025
 Florida Atlantic University
